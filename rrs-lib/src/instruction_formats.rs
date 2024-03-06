@@ -19,6 +19,8 @@ pub const OPCODE_BRANCH: u32 = 0x63;
 pub const OPCODE_JALR: u32 = 0x67;
 pub const OPCODE_JAL: u32 = 0x6f;
 pub const OPCODE_SYSTEM: u32 = 0x73;
+pub const OPCODE_NATIVE_OP: u32 = 0x7f;
+pub const OPCODE_NATIVE_OP_IMM: u32 = 0x1b;
 
 #[derive(Debug, PartialEq)]
 pub struct RType {

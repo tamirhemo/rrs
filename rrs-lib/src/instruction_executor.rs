@@ -595,4 +595,32 @@ impl<'a, M: Memory> InstructionProcessor for InstructionExecutor<'a, M> {
     fn process_ebreak(&mut self) -> Self::InstructionResult {
         Err(InstructionTrap::Exception(ExceptionCause::Breakpoint, 0))
     }
+
+    fn process_native_add(
+        &mut self,
+        dec_insn: instruction_formats::RType,
+    ) -> Self::InstructionResult {
+        unreachable!("Native field operation not supoorted")
+    }
+
+    fn process_native_sub(
+        &mut self,
+        _dec_insn: instruction_formats::RType,
+    ) -> Self::InstructionResult {
+        unreachable!("Native field operation not supoorted")
+    }
+
+    fn process_native_mul(
+        &mut self,
+        _dec_insn: instruction_formats::RType,
+    ) -> Self::InstructionResult {
+        unreachable!("Native field operation not supoorted")
+    }
+
+    fn process_native_div(
+        &mut self,
+        _dec_insn: instruction_formats::RType,
+    ) -> Self::InstructionResult {
+        unreachable!("Native field operation not supoorted")
+    }
 }

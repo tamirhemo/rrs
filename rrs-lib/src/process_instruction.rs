@@ -58,6 +58,48 @@ fn process_opcode_op<T: InstructionProcessor>(
     }
 }
 
+fn process_opcode_native_op<T: InstructionProcessor>(
+    processor: &mut T,
+    insn_bits: u32,
+) -> Option<T::InstructionResult> {
+    let dec_insn = instruction_formats::RType::new(insn_bits);
+
+    match dec_insn.funct3 {
+        0b000 => match dec_insn.funct7 {
+            0b000_0000 => Some(processor.process_native_add(dec_insn)),
+            _ => None,
+        },
+        0b001 => match dec_insn.funct7 {
+            0b000_0000 => Some(processor.process_native_sub(dec_insn)),
+            _ => None,
+        },
+        0b010 => match dec_insn.funct7 {
+            0b000_0000 => Some(processor.process_native_mul(dec_insn)),
+            _ => None,
+        },
+        0b011 => match dec_insn.funct7 {
+            0b000_0000 => Some(processor.process_native_div(dec_insn)),
+            _ => None,
+        },
+        _ => None,
+    }
+}
+
+fn process_opcode_native_op_imm<T: InstructionProcessor>(
+    processor: &mut T,
+    insn_bits: u32,
+) -> Option<T::InstructionResult> {
+    let dec_insn = instruction_formats::IType::new(insn_bits);
+
+    match dec_insn.funct3 {
+        0b000 => Some(processor.process_native_addi(dec_insn)),
+        0b001 => Some(processor.process_native_subi(dec_insn)),
+        0b010 => Some(processor.process_native_muli(dec_insn)),
+        0b011 => Some(processor.process_native_divi(dec_insn)),
+        _ => None,
+    }
+}
+
 fn process_opcode_op_imm<T: InstructionProcessor>(
     processor: &mut T,
     insn_bits: u32,
@@ -197,6 +239,10 @@ pub fn process_instruction<T: InstructionProcessor>(
             }
         }
         instruction_formats::OPCODE_SYSTEM => process_opcode_system(processor, insn_bits),
+        instruction_formats::OPCODE_NATIVE_OP => process_opcode_native_op(processor, insn_bits),
+        instruction_formats::OPCODE_NATIVE_OP_IMM => {
+            process_opcode_native_op_imm(processor, insn_bits)
+        }
         _ => None,
     }
 }

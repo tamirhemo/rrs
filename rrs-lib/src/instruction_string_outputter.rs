@@ -281,6 +281,34 @@ impl InstructionProcessor for InstructionStringOutputter {
     fn process_ebreak(&mut self) -> Self::InstructionResult {
         String::from("ebreak")
     }
+
+    fn process_native_add(
+        &mut self,
+        _dec_insn: instruction_formats::RType,
+    ) -> Self::InstructionResult {
+        unreachable!("Native field operation not supoorted")
+    }
+
+    fn process_native_sub(
+        &mut self,
+        _dec_insn: instruction_formats::RType,
+    ) -> Self::InstructionResult {
+        unreachable!("Native field operation not supoorted")
+    }
+
+    fn process_native_mul(
+        &mut self,
+        _dec_insn: instruction_formats::RType,
+    ) -> Self::InstructionResult {
+        unreachable!("Native field operation not supoorted")
+    }
+
+    fn process_native_div(
+        &mut self,
+        _dec_insn: instruction_formats::RType,
+    ) -> Self::InstructionResult {
+        unreachable!("Native field operation not supoorted")
+    }
 }
 
 #[cfg(test)]

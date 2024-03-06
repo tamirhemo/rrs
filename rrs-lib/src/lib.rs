@@ -38,6 +38,48 @@ pub trait InstructionProcessor {
     fn process_or(&mut self, dec_insn: instruction_formats::RType) -> Self::InstructionResult;
     fn process_and(&mut self, dec_insn: instruction_formats::RType) -> Self::InstructionResult;
 
+    fn process_native_add(
+        &mut self,
+        dec_insn: instruction_formats::RType,
+    ) -> Self::InstructionResult;
+    fn process_native_sub(
+        &mut self,
+        dec_insn: instruction_formats::RType,
+    ) -> Self::InstructionResult;
+    fn process_native_mul(
+        &mut self,
+        dec_insn: instruction_formats::RType,
+    ) -> Self::InstructionResult;
+    fn process_native_div(
+        &mut self,
+        dec_insn: instruction_formats::RType,
+    ) -> Self::InstructionResult;
+
+    fn process_native_addi(
+        &mut self,
+        dec_insn: instruction_formats::IType,
+    ) -> Self::InstructionResult {
+        unimplemented!()
+    }
+    fn process_native_subi(
+        &mut self,
+        dec_insn: instruction_formats::IType,
+    ) -> Self::InstructionResult {
+        unimplemented!()
+    }
+    fn process_native_muli(
+        &mut self,
+        dec_insn: instruction_formats::IType,
+    ) -> Self::InstructionResult {
+        unimplemented!()
+    }
+    fn process_native_divi(
+        &mut self,
+        dec_insn: instruction_formats::IType,
+    ) -> Self::InstructionResult {
+        unimplemented!()
+    }
+
     fn process_addi(&mut self, dec_insn: instruction_formats::IType) -> Self::InstructionResult;
     fn process_slli(
         &mut self,
